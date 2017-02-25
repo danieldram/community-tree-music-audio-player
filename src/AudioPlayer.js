@@ -10,14 +10,13 @@ class AudioPlayer extends Component {
 
   state={
     playState:false,
-    seconds: 0,
+    seconds: '00',
     minutes: 0
   }
 
   constructor(props){
     super(props)
     this.props = props
-    console.log(this.props)
   }
 
   onWindowChange(){
@@ -40,13 +39,12 @@ class AudioPlayer extends Component {
         seconds:(currentTime < 10) ? `0${parseInt(currentTime)}` : parseInt(currentTime),
         minutes:Math.floor(parseInt(currentTime)/60)
       })
-
     })
   }
 
 
   componentDidMount(){
-    this.wavesurfer = WaveSurfer.create({container:'#waveform', waveColor:"#4ec0a9", progressColor:'#eee', barWidth:3})
+    this.wavesurfer = WaveSurfer.create({container:'#waveform', waveColor:"#4ec0a9", progressColor:'#eee', barWidth:2})
     this.wavesurfer.load(this.props.file)
     this.setState({totalTime:this.wavesurfer.getDuration()})
     this.onWindowChange()
